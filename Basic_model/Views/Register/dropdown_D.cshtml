@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Basic_model.Models.Drop_displayModel>
+
+@{
+    ViewData["Title"] = "dropdown_D";
+    Layout = "~/Views/Shared/Index_Layout.cshtml";
+}
+
+
+
+<!-- table Design-->
+<section class="ftco-section border border-primary border-5  rounded gap-5 p-5">
+    <div class="container">
+        <div class="row justify-content-center ">
+            <div class="col-md-6 text-center mb-5">
+                <h2 class="heading-section">Date</h2>
+            </div>
+        </div>
+        @using (Html.BeginForm())
+        {
+
+           if(ViewBag.orders==null)
+           {
+                <table style="width:100%">
+                    <tr>
+                        <td>
+                            Customerid : @Html.DropDownList("CustomerID", new SelectList(ViewBag.data, "CustomerID", "CustomerID"), "Please select", new { @id = "ddlFruits" })
+                        </td>
+                        <td>
+                            <input type="submit" value="submit" id="submit" />
+                        </td>
+                    </tr>
+                </table>
+           }
+            else
+            {
+
+            
+                                <table style="width:100%">
+                                    <tr>
+                                        <td>
+                                            Customerid : @Html.DropDownList("CustomerID", new SelectList(ViewBag.data, "CustomerID", "CustomerID"), "Please select", new { @id = "ddlFruits" })
+                                        </td>
+                                        <td>
+                                            <input type="submit"class="bt" value="submit" id="submit" />
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <br/>
+
+                <div class="row ">
+                    <div class="col">
+                        <div class="table-wrap d-flex justify-content-center align-content-center ">
+                                    <table class="table table-striped  " id="myTable">
+                                        <thead>
+                                            <tr style="background-color:royalblue;">
+                                        <th>CustomerID</th>
+                                        <th>OrderDate</th>
+                                        <th>Freight</th>
+                                        <th>ShipName</th>
+                                        <th>Ship Address</th>
+                                    </tr>
+                  
+                                    </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.orders as List<Basic_model.Models.Drop_displayModel>)
+                                {
+                                    <tr>
+                                        <td>@item.CustomerID</td>
+                                        <td>@item.OrderDate</td>
+                                        <td>@item.Freight</td>
+                                        <td>@item.ShipName</td>
+                                        <td>@item.ShipAddress</td>
+                                    </tr>
+                                }
+                                </tbody>
+                                </table>
+                         </div>
+                 </div>
+            </div>
+            }
+           
+   
+            
+        }
+    </div>
+</section>

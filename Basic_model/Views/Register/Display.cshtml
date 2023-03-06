@@ -1,0 +1,103 @@
+﻿@model IEnumerable<Basic_model.Models.DisplayModel>
+@{
+    ViewData["Title"] = "Display";
+    Layout = "~/Views/Shared/Index_Layout.cshtml";
+}
+
+
+<!-- table Design-->
+<section class="ftco-section border border-primary border-5  rounded gap-5 p-5">
+    <div class="container">
+        <div class="row justify-content-center ">
+            <div class="col-md-6 text-center mb-5">
+                <h2 class="heading-section">Table</h2>
+            </div>
+        </div>
+        <!--
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+             <script>
+                function myFunction() {
+                    var input, filter, table, tr, td, i, txtValue;
+                    input = document.getElementById("myInput");
+                    filter = input.value.toUpperCase();
+                    table = document.getElementById("myTable");
+                    tr = table.getElementsByTagName("tr");
+                    for (i = 0; i < tr.length; i++) {
+                        td = tr[i].getElementsByTagName("td")[0];
+                        if (td) {
+                            txtValue = td.textContent || td.innerText;
+                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                            } else {
+                                tr[i].style.display = "none";
+                            }
+                        }
+                    }
+                }
+            </script>
+        -->
+
+        <div class="row ">
+            <div class="col">
+                <div class="table-wrap d-flex justify-content-center align-content-center ">
+
+                    <table class="table table-striped  " id="myTable">
+                        <thead>
+                            <tr style="background-color:royalblue;">
+
+
+
+
+                                <th>Users_id</th>
+                                <th>Name</th>
+                                <th>DOB</th>
+                                <th>Gender</th>
+                                <th>Mobile</th>
+                                
+                                <th>Email</th>
+                                <th>Password</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                @if (this.User.IsInRole("Admin") || !this.User.Identity.IsAuthenticated)
+                                    {
+                                <th>Edit&Delete</th>
+                                    }
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                         @foreach(var item in Model){
+                                <tr>
+                                 <td>@item.Users_id</td>
+                                <td>@item.Name</td>
+                                <td>@item.DOB</td>
+                                <td>@item.Gender</td>
+                                <td>@item.Mobile</td>
+                                <td>@item.Email</td>
+                                <td>@item.Password</td>
+                                <td>@item.Role</td>
+                                <td>@item.Status</td>
+                               
+                                    @if (this.User.IsInRole("Admin") || !this.User.Identity.IsAuthenticated)
+                                    {
+                                <td>
+                                    @Html.ActionLink("Update","Edit","Register",new{Users_id=item.Users_id},null)|
+                                    @Html.ActionLink("Delete","delete_u","Register",new{Users_id=item.Users_id},new{OnClick="return confirm ('Are Sure wants to delete?');"})
+
+                                </td>
+                                    }
+                                    else{
+                                        <td></td>
+                                    }
+                                </tr>
+
+                               
+                         }
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

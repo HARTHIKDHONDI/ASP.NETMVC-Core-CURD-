@@ -1,0 +1,128 @@
+﻿@using Basic_model.Models
+@model Curd
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/Index_Layout.cshtml";
+}
+
+
+    
+
+<section class="ftco-section border border-primary border-5  rounded gap-5 p-5 vh-150" style="background-color: #eee;">
+    <div class="container ">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-6 col-xl-6">
+                <div class="card text-black justify-content-center align-items-center" style="border-radius: 25px;">
+                    <div class="card-body">
+                        <div class="row justify-content-center ">
+                            <div class="col-md-6 text-center mb-5">
+                                <h2 class="heading-section">Edit</h2>
+                            </div>
+                        </div>
+                        @using (Html.BeginForm())
+                        {
+                            <div class="mb-3">
+                                <div class="col-12">
+                                <label for="exampleInputName1" class="form-label"><b>Name</label>
+                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control"})
+                                </div>
+                             </div>
+
+                            <div class="mb-3">
+                                <div class="col-12">
+                                <label for="exampleInputDOB1" class="form-label me-3"><b>DOB</label>
+                                    @Html.EditorFor(m => m.DOB, new { @class = "form-control"})
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+
+                                <label class="form-label me-4" for="form3Example3c"><b>Gender</label>
+
+                                <div class="form-check form-check-inline mb-0 me-6">
+                                    @Html.RadioButtonFor(m => m.Gender, "Male", new { id = "male-true"})
+                                    @Html.Label("male-true", "Male" ,new{@class="me-5"  })
+                                    @Html.RadioButtonFor(m => m.Gender, "Female", new { id = "female-true"})
+                                    @Html.Label("female-true", "Female")
+                   
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="col-12">
+                                <label for="exampleInputMobile1" class="form-label"><b>Mobile</label>
+                                @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control"})
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="col-12">
+                                <label for="exampleInputEmail1" class="form-label"><b>Email address</label>
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control"})
+                                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                    <div class="col-12">
+                                <label for="exampleInputPassword1" class="form-label"><b>Password</label>
+                                @Html.TextBoxFor(m => m.Password, new { @class = "form-control"})
+                                </div>
+                            </div>
+
+                              <div class="mb-3">
+                                    <div class="col-12">
+                                <label for="exampleInputPassword1" class="form-label"><b>Confirm Password</label>
+                                @Html.TextBoxFor(m => m.Con_password, new { @class = "form-control"})
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row align-items-center mb-2">
+
+                                <div class="form-outline flex-fill mb-0">
+                                    <div class="col-12">
+                                        <label class="form-label" for="form3Example4cd"><b>Role</label>
+                                        @Html.DropDownListFor(m => m.Role, new List<SelectListItem> {
+                                    new SelectListItem { Text="--Select--",Value="0"},
+                                    new SelectListItem { Text="Student",Value="Student"},
+                                    new SelectListItem { Text="Admin",Value="Admin"},
+                                    new SelectListItem { Text="Librarian",Value="Librarian"},
+                                    new SelectListItem { Text="PT",Value="PT"}
+                                    }, new { @class = "select form-control" })
+                        
+                       
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row align-items-center mb-2">
+
+                                <div class="form-outline flex-fill mb-0">
+                                    <div class="col-12">
+                                        <label class="form-label" for="form3Example4cd"><b>Status</label>
+                                        @Html.DropDownListFor(m => m.Status, new List<SelectListItem> {
+                                    new SelectListItem { Text="--Select--",Value="0"},
+                                    new SelectListItem { Text="Active",Value="True"},
+                                    new SelectListItem { Text="InActive",Value="False"}
+                                    }, new { @class = "select form-control" })
+                        
+                        
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        <input type="submit" name="submit" id="submit" class="btn btn-primary btn-lg ">
+                        @ViewBag.errormsg
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

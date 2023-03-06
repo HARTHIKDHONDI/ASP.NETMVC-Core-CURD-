@@ -1,0 +1,72 @@
+﻿@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Basic_model.Models
+@model List<FileModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/Index_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Index</title>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <section class="ftco-section border border-primary border-5  rounded gap-5 p-5">
+            <div class="container">
+                <div class="row justify-content-center ">
+                    <div class="col-md-6 text-center mb-5">
+                        <h2 class="heading-section">File Upload</h2>
+                    </div>
+                </div>
+                    <br/>
+                    <form asp-action="Index" asp-controller="Register" method="post" enctype="multipart/form-data">
+                    <div class="mb-3 ">
+                    <div class="row justify-content-center">
+                        <div class="col-5 text-center mb-5" >
+                                    <input class="form-control" type="file" id="formFileMultiple" name="postedFiles" multiple />
+                                    <br>
+                                    <input type="submit" value="Upload" class="btn btn-primary" />
+                                </div>
+                        </div>
+                      </div>
+                    </form>
+
+                    <br/>
+                <div class="row ">
+                    <div class="col">
+                        <div class="table-wrap d-flex justify-content-center align-content-center ">
+                            <table class="table table-striped  " id="myTable">
+                            <tr style="background-color:royalblue;">
+                                    <th>Name</th>
+                                    <th>Download</th>
+                                    <th>Delete</th>
+                                </tr>
+                                <tbody>
+                                    @foreach (FileModel file in Model)
+                                    {
+                                        <tr>
+                                            <td>@file.Name</td>
+                                            <td><a href='@Url.Action("DownloadFile","Register", new { fileId = file.Id })'>Download</a></td>
+                                            <td>
+                                                @Html.ActionLink("Delete","DELETE","Register", new {Id = file.Id},  new { onclick = "return confirm('Are sure wants to delete?');" })
+                                            </td>
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </body>
+</html>
